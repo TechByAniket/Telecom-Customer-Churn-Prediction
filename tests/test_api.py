@@ -7,8 +7,8 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from fastapi.testclient import TestClient
-from api.main import app
 
+from api.main import app
 
 client = TestClient(app)
 

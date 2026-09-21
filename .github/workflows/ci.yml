@@ -11,11 +11,16 @@ on:
 
 jobs:
 
+  # ============================================================
+  # TEST JOB
+  # ============================================================
+
   test:
     name: Run Tests
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -33,3 +38,30 @@ jobs:
       - name: Run tests
         run: |
           pytest tests/ -v
+
+
+  # ============================================================
+  # LINT JOB
+  # ============================================================
+
+  lint:
+    name: Run Lint
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Ruff
+        run: |
+          pip install ruff
+
+      - name: Run Ruff
+        run: |
+          ruff check api tests
